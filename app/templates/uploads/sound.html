@@ -1,0 +1,37 @@
+{% extends "outer_template.html" %}
+
+{% block title %}
+    Sound
+{% endblock %}
+
+{% block head %}
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="wavesurfer.min.js"></script>
+{% endblock %}
+
+
+
+
+{% block content %}
+
+
+    <div id ="wave" ></div>
+
+
+        <script>
+        var wavesurfer = Object.create(WaveSurfer);
+
+        wavesurfer.init({
+            container: document.querySelector("#wave"),
+            waveColor: 'violet',
+            progressColor: 'purple'
+        });
+
+        wavesurfer.on('ready', function () {
+            wavesurfer.play();
+        });
+
+        wavesurfer.load({{ url_for('get_sound', filename = sound) }});
+        </script>
+{% endblock %}

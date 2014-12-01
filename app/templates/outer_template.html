@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %}</title>
+
+{% block head %}
+{% endblock %}
+
+</head>
+<body>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li style = "list-style: none;">{{ message }} </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+
+{% endwith %}
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
