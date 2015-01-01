@@ -1,6 +1,7 @@
 from app import app
 from app import views, config
-from app.uploads import views
+from app.projects import views
+from app.projects.uploads import views
 
 
 if __name__ == '__main__':

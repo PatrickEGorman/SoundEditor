@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/js/mainJS.js"></script>
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
 
@@ -9,19 +12,28 @@
 
 </head>
 <body>
+<div class="outerBody">
+<div class="flash">
 {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul>
     {% for message in messages %}
-        <li style = "list-style: none;">{{ message }} </li>
+        <li style = "list-style: none;text-align: center;">{{ message }} </li>
     {% endfor %}
     </ul>
     {% endif %}
+</div>
+<div class="heading">
+{% block heading %}
+{% endblock %}
+</div>
 
 {% endwith %}
-
+<div class = "innerBody">
 {% block content %}
 {% endblock %}
+</div>
+</div>
 
 </body>
 </html>
