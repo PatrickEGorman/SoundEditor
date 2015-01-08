@@ -7,6 +7,11 @@ body {
 }
 ul{
     padding:0;
+    width:70%;
+    height:10%;
+}
+a{
+    text-decoration: none;
 }
 .outerBody{
     position:absolute;
@@ -24,6 +29,8 @@ ul{
     z-index: 0;
 }
 .menu{
+    align-content: center;
+    display:inline;
 }
 .dropdown{
     z-index: 2;
@@ -32,13 +39,10 @@ ul{
 }
 .dropdown-link{
     background-image:linear-gradient(rgba(120, 255, 205, 0.58), rgba(120, 114, 255, 0.56));
-    padding: 1% 5%;
-    margin-right: 1px;
-    margin-left: 1px;
+    padding: 1% 2%;
     font:sans-serif;
     color: #deff29;
     border-radius: 5px;
-    border: 5px rgba(145, 145, 145, 0.57);
     text-decoration: none;
 }
 .dropdown-link:hover{
@@ -50,9 +54,10 @@ ul{
 .dropdown ul{
     display: none;
     list-style: none;
-    position:absolute;
-    top: 145%;
+    position: absolute;
+    top:60%;
     width:100%;
+    height:auto;
     background-color: rgba(188, 86, 0, 0.53);
     border-radius: 3px;
     text-align: right;

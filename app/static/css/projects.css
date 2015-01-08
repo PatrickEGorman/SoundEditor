@@ -2,6 +2,24 @@
 .sounds{
     text-align: left;
 }
+.projectlink{
+    background-image:linear-gradient(rgba(120, 255, 205, 0.58), rgba(120, 114, 255, 0.56));
+    padding: 1% 6%;
+    font:sans-serif;
+    color: #deff29;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.projectlink:hover{
+    background-color: rgba(30, 171, 17, 0.81);
+    font: bold;
+    cursor:pointer;
+    color: #ff9700;
+}
+.dropzoneDiv{
+    position:fixed;
+    display:none;
+}
 .checkbox {
 	width: 28px;
 	height: 28px;
@@ -22,6 +40,7 @@
 	-moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
 	box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
     position:relative;
+    float:left;
 }
 
 .checkbox label {
@@ -415,9 +434,4 @@ menu.small .pause:hover:before,
 menu.small .pause:hover:after {
   background-color: rgba(36, 36, 36, 0.8);
 }
-/*
-The buttons mixin that defines the buttons styles, the @size must be defined to set the relative size
-*/
-/*
-Other Styles
-*/
+

@@ -2,66 +2,90 @@
 {% block head %}
 <link rel="stylesheet" href="/static/css/dropzone.css">
 <link rel="stylesheet" href="/static/css/projects.css">
-<script src="/static/js/dropzone.js"></script>
-<script src="/static/js/projects.js"></script>
+<script src="/static/js/projects/dropzone.js"></script>
+<script src="/static/js/projects/wavesurfer.min.js"></script>
+<script src="/static/js/projects/projects.js"></script>
 {% endblock %}
 
 {% block heading %}
-    <ul class="menu">
-        <div class="dropdown" id="dropdown"><a class="dropdown-link" href="#">File</a>
+    <div class="menu">
+        <div class="dropdown" id="dropdown"><a class="projectlink" href="#">File</a>
             <ul>
                 <li><a href="#" id="display_add"
-                       onclick="display('dropzone','display_add','hide_add'); $('#add_files').show()">Upload</a></li>
+                       onclick="display('dropzoneDiv','display_add','hide_add');
+                                $('#add_files').show();">
+                                    Upload
+                    </a>
+                </li>
                 <li><a href="#" id="hide_add" style="display: none"
-                       onclick="hide('dropzone','display_add','hide_add')">Hide Uploads</a></li>
+                       onclick="hide('dropzoneDiv','display_add','hide_add');">
+                                    Hide Uploads
+                    </a>
+                </li>
                 <li> <a href="#" id="add_files" style="display: none"
                         onclick="location.reload()">Add Sounds</a></li>
             </ul>
 
         </div>
-        <div class="dropdown" id="dropdown"><a class="dropdown-link" href="#">Edit</a>
+        <div class="dropdown" id="dropdown"><a class="projectlink" href="#">Edit</a>
+            <ul>
+                <li><a href="#" onclick="deleteSounds({{ project.id }});">Delete Sounds</a></li>
+                    <li><br></li>
+                <li><a href="#" onclick="selectAll();">Select All</a></li>
+                <li><a href="#" >Select None</a></li>
+            </ul>
+        </div>
+        <div class="dropdown" id="dropdown"><a class="projectlink" href="#">View</a>
+            <ul>
+                <li><a href="/home">Home</a></li>
+            </ul>
+        </div>
+        <div class="dropdown" id="dropdown"><a class="projectlink" href="#">   Effects   </a>
             <ul>
                 <li><a href="#">Test</a></li>
             </ul>
         </div>
-        <div class="dropdown" id="dropdown"><a class="dropdown-link" href="#">View</a>
-            <ul>
-                <li><a onclick="window.history.back()">Back</a></li>
-            </ul>
-        </div>
-        <div class="dropdown" id="dropdown"><a class="dropdown-link" href="#">   Effects   </a>
-            <ul>
-                <li><a href="#">Test</a></li>
-            </ul>
-        </div>
-    </ul>
+    </div>
 {% endblock %}
 
 {% block content %}
+    <div class="dropzoneDiv" id = "dropzoneDiv">
+        <button class="btn" id="hideDropzone"
+            onclick="hide('dropzoneDiv','display_add','hide_add');">
+            Hide Dropzone
+        </button>
+    <br>
+    <br>
         <form action="{{ "/add_file/"~project.id }}"
-      method = "post"
-      class="dropzone"
-      id="dropzone"
-      enctype="multipart/form-data"
-      name=file></form>
+            method = "post"
+            class="dropzone"
+            id="dropzone"
+            enctype="multipart/form-data"
+            name=file></form>
+    </div>
+    <br>
+    <br>
     <div class="sounds">
     {% for sound in project.sounds %}
-        <br>
-        <br>
-        <script>var {{ "sound"~sound.id }} = new Sound("{{ url_for('uploaded_file', filename=sound.filename,
-            project_id=project.id) }}");</script>
+        <script>
+            loadSound("{{ url_for('uploaded_file', filename=sound.filename,
+                    project_id=project.id) }}", {{ loop.index0 }});
+        </script>
 <div class="checkbox">
-	<input type="checkbox" value="None" id="{{ "checkbox"~sound.id }}" name="check" />
-	<label for="{{ "checkbox"~sound.id }}"></label>
+	<input type="checkbox" value="None" id="{{ "checkbox"~loop.index0 }}" name="check" onclick="sounds[{{ loop.index0 }}].check();"/>
+	<label for="{{ "checkbox"~loop.index0 }}"></label>
 </div>
+        <a>  {{ sound.filename }}</a>
+        <div id="{{ "wave"~loop.index0 }}" class="wave" onmouseup="sounds[{{ loop.index0 }}].changePosition();">
+            </div>
         <menu class="small">
             <button class="rw"></button>
-            <button class="play" onclick="{{ "sound"~sound.id }}.play()"></button>
-            <button class="pause" onclick="{{ "sound"~sound.id }}.pause()"></button>
-            <button class="stop" onclick="{{ "sound"~sound.id }}.stop()"></button>
+            <button class="play" onclick="sounds[{{ loop.index0 }}].play()"></button>
+            <button class="pause" onclick="sounds[{{ loop.index0 }}].pause()"></button>
+            <button class="stop" onclick="sounds[{{ loop.index0 }}].stop()"></button>
             <button class="ff"></button>
-</menu>
-    {% endfor %}
+    </menu>
+{% endfor %}
     </div>
 
 {% endblock %}

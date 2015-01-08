@@ -49,7 +49,7 @@ def userhome():
                     new_project = Project(project_name=project_name)
                     db.session.add(new_project)
                     db.session.commit()
-                    flash("Project_created!")
+                    flash("Project created!")
                     return redirect(url_for("project_home", project_name=project_name))
                 else:
                     flash("Project name already exists!")
@@ -80,3 +80,11 @@ def create_account():
         db.session.commit()
         return redirect("/home")
     return render_template("create_user.html")
+
+
+@login_required
+@app.route('/delete_account')
+def delete_account():
+    db.session.delete(current_user)
+    db.session.commit()
+    return redirect("/home")

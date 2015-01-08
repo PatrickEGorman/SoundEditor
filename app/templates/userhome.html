@@ -8,21 +8,22 @@
 
     <button class="btn" onclick="display('create_project','display_add','hide_add')" id="display_add">New Project</button>
     <button class="btn" onclick="hide('create_project','display_add','hide_add')" id="hide_add" style="display:none;">Hide</button>
+        <br>
     <form method="post" id="create_project" style="display:none">
     <br>
         <input class="text" type="text" name="project_name" pattern=".{5,10}"
                required title="5-10 characters only">
-    <br>
-    <br>
+        <br>
+        <br>
         <input class="btn" type="submit" name="create"
                value="Create Project">
     <br>
     </form>
     {% endif %}
-<br>
-<br>
-    <ul class="menu">
+    {% if projects %}
+     <div class="menu">
     {% for project in projects %}
+        <br>
         <div class="dropdown" id="dropdown">
         <a href="#" class="dropdown-link">
                     {{ project.project_name }}
@@ -31,11 +32,16 @@
                 <li><a href="{{ url_for("project_home", project_name=project.project_name) }}">Edit</a></li>
                 <li><a id="delete_project" href="{{ url_for('remove',project_id=project.id) }}">Remove</a></li>
             </ul>
-        </div>
+        <br>
     {% endfor %}
-    </ul>
+    </div>
     <br>
-    <br>
+    {% endif %}
+ <a href = "/delete_account" onclick="return confirm('Are you sure you wish to delete this account?')">
+    <button class="btn">Delete Account</button>
+</a>
+<br>
+<br>
 <a href = "/logout">
     <button class="btn">Logout</button>
 </a>

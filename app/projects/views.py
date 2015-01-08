@@ -1,7 +1,7 @@
 __author__ = 'patrickgorman'
 import os
 from app import app, db
-from flask import render_template, request, flash, redirect, url_for
+from flask import render_template, request, flash, redirect, url_for, g
 from models import Project
 from app.projects.uploads.models import Sound
 from flask.ext.login import login_required
