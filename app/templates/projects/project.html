@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/static/css/projects.css">
 <script src="/static/js/projects/dropzone.js"></script>
 <script src="/static/js/projects/wavesurfer.min.js"></script>
-<script src="/static/js/projects/projects.js"></script>
+<script src="/static/js/projects/knockout-3.2.0.js"></script>
 {% endblock %}
 
 {% block heading %}
@@ -66,26 +66,51 @@
     <br>
     <br>
     <div class="sounds">
+
+{#        <a>  {{ sound.filename }}</a>#}
+{#        <div id="{{ "wave"~loop.index0 }}" class="wave" onmouseup="sounds[{{ loop.index0 }}].changePosition();">#}
+{#            </div>#}
+{#        <menu class="small">#}
+{#            <button class="rw"></button>#}
+{#            <button class="play" onclick="sounds[{{ loop.index0 }}].play()"></button>#}
+{#            <button class="pause" onclick="sounds[{{ loop.index0 }}].pause()"></button>#}
+{#            <button class="stop" onclick="sounds[{{ loop.index0 }}].stop()"></button>#}
+{#            <button class="ff"></button>#}
+{#    </menu>#}
+
+{##}
+{#        <div class="checkbox">#}
+{#	                    <input type="checkbox" value="None" id="jkl" name="check" data-bind="$root.checkSound"/>#}
+{#	                    <label for="jkl"></label>#}
+{#                    </div>#}
+{#        <div class="checkbox">#}
+{#	                    <input type="checkbox" value="None" id="kljlk" name="check" data-bind="$root.checkSound"/>#}
+{#	                    <label for="kljlk"></label>#}
+{#                    </div>#}
+    <table>
+    <thead><tr>
+        <th>id</th><th>SoundName</th><th>SoundURL</th><th></th>
+    </tr></thead>
+        <tbody data-bind="foreach: sounds">
+            <tr>
+                <td data-bind="text: soundData.id"></td>
+                <td><div data-bind="text: soundData.filename"></div></td>
+                <td data-bind="text: soundData.url"></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div data-bind="css: className"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="/static/js/projects/sounds.js"></script>
+    </div>
     {% for sound in project.sounds %}
         <script>
             loadSound("{{ url_for('uploaded_file', filename=sound.filename,
-                    project_id=project.id) }}", {{ loop.index0 }});
+                    project_id=project.id) }}", {{ sound.id }}, "{{ sound.filename }}");
         </script>
-<div class="checkbox">
-	<input type="checkbox" value="None" id="{{ "checkbox"~loop.index0 }}" name="check" onclick="sounds[{{ loop.index0 }}].check();"/>
-	<label for="{{ "checkbox"~loop.index0 }}"></label>
-</div>
-        <a>  {{ sound.filename }}</a>
-        <div id="{{ "wave"~loop.index0 }}" class="wave" onmouseup="sounds[{{ loop.index0 }}].changePosition();">
-            </div>
-        <menu class="small">
-            <button class="rw"></button>
-            <button class="play" onclick="sounds[{{ loop.index0 }}].play()"></button>
-            <button class="pause" onclick="sounds[{{ loop.index0 }}].pause()"></button>
-            <button class="stop" onclick="sounds[{{ loop.index0 }}].stop()"></button>
-            <button class="ff"></button>
-    </menu>
-{% endfor %}
-    </div>
+    {% endfor %}
 
 {% endblock %}

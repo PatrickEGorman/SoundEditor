@@ -1,11 +1,9 @@
 __author__ = 'patrickgorman'
 import os
 from app import app, db
-from flask import render_template, request, flash, redirect, url_for, g
+from flask import render_template, request, flash, redirect
 from models import Project
-from app.projects.uploads.models import Sound
 from flask.ext.login import login_required
-from werkzeug.utils import secure_filename
 
 
 
@@ -14,9 +12,9 @@ def allowed_filename(filename):
         filename.split(".", 1)[1] in app.config["ALLOWED_EXTENSIONS"]
 
 @login_required
-@app.route("/project/<project_name>", methods=["GET", "POST"])
-def project_home(project_name):
-    project = Project.query.filter_by(project_name=project_name).first()
+@app.route("/project/<project_id>", methods=["GET", "POST"])
+def project_home(project_id):
+    project = Project.query.filter_by(id=project_id).first()
     if request.method == "POST":
         pass
     return render_template("projects/project.html", project=project)

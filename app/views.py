@@ -50,7 +50,7 @@ def userhome():
                     db.session.add(new_project)
                     db.session.commit()
                     flash("Project created!")
-                    return redirect(url_for("project_home", project_name=project_name))
+                    return redirect(url_for("project_home", project_id=new_project.id))
                 else:
                     flash("Project name already exists!")
                     return redirect("/userhome")
