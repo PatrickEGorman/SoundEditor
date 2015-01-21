@@ -5,6 +5,8 @@
 <script src="/static/js/projects/dropzone.js"></script>
 <script src="/static/js/projects/wavesurfer.min.js"></script>
 <script src="/static/js/projects/knockout-3.2.0.js"></script>
+<script>   $SCRIPT_ROOT = {{ request.script_root|tojson|safe }}; </script>
+
 {% endblock %}
 
 {% block heading %}
@@ -61,32 +63,12 @@
             class="dropzone"
             id="dropzone"
             enctype="multipart/form-data"
-            name=file></form>
+            name=file
+            data-bind="submit: test"></form>
     </div>
     <br>
     <br>
     <div class="sounds">
-
-{#        <a>  {{ sound.filename }}</a>#}
-{#        <div id="{{ "wave"~loop.index0 }}" class="wave" onmouseup="sounds[{{ loop.index0 }}].changePosition();">#}
-{#            </div>#}
-{#        <menu class="small">#}
-{#            <button class="rw"></button>#}
-{#            <button class="play" onclick="sounds[{{ loop.index0 }}].play()"></button>#}
-{#            <button class="pause" onclick="sounds[{{ loop.index0 }}].pause()"></button>#}
-{#            <button class="stop" onclick="sounds[{{ loop.index0 }}].stop()"></button>#}
-{#            <button class="ff"></button>#}
-{#    </menu>#}
-
-{##}
-{#        <div class="checkbox">#}
-{#	                    <input type="checkbox" value="None" id="jkl" name="check" data-bind="$root.checkSound"/>#}
-{#	                    <label for="jkl"></label>#}
-{#                    </div>#}
-{#        <div class="checkbox">#}
-{#	                    <input type="checkbox" value="None" id="kljlk" name="check" data-bind="$root.checkSound"/>#}
-{#	                    <label for="kljlk"></label>#}
-{#                    </div>#}
     <table>
     <thead><tr>
         <th>id</th><th>SoundName</th><th>SoundURL</th><th></th>

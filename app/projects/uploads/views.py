@@ -6,6 +6,7 @@ from app import app, db
 from app.projects.models import Project
 from models import Sound
 
+
 def allowed_filename(filename):
     return "." in filename and \
         filename.split(".", 1)[1] in app.config["ALLOWED_EXTENSIONS"]
@@ -30,6 +31,7 @@ def uploaded_file(filename, project_id):
     directory = Project.query.filter_by(id=project_id).first().project_directory
     return send_from_directory(directory=directory,
                                filename=filename)
+
 
 @login_required
 @app.route('/delete')

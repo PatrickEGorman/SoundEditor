@@ -2,6 +2,7 @@ var context = new (window.AudioContext || window.webkitAudioContext)();
 var analyser = context.createAnalyser();
 var sounds = [];
 var soundsViewModel = new SoundsViewModel();
+var numSounds = 0;
 
 
 function Sound(soundNum, url, buffer, filename) {
@@ -94,7 +95,7 @@ function SoundsViewModel() {
         if(sound.isChecked){
             self.sounds.remove(sound);
         }
-    })
+    });
 }
 
 
@@ -107,6 +108,7 @@ function loadSound(url, soundNum, filename) {
     context.decodeAudioData(request.response, function(buffer) {
       var sound = new Sound(soundNum, url, buffer, filename);
       soundsViewModel.addSound(sound);
+      numSounds++;
     });
   };
     request.send();
