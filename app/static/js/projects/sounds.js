@@ -85,6 +85,9 @@ function Sound(soundNum, url, buffer, filename) {
 function SoundsViewModel() {
     var self = this;
     self.sounds = ko.observableArray([]);
+    self.test = function(){
+        console.log('test');
+    };
 
     self.addSound = function(sound) {
         self.sounds.push(sound);
